@@ -1,0 +1,4 @@
+name: Pluto
+version: '1.0'
+main: xyz.mtrdevelopment.pluto.Pluto
+authors: [ MTR Development ]
