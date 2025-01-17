@@ -19,6 +19,7 @@ public final class Pluto extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         registerLibraries();
         loadModels();
         registerListeners();

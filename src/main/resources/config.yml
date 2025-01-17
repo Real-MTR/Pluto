@@ -1,0 +1,8 @@
+messages:
+  usage-message: "&cUsage: /vault <number>"
+  no-permission-to-use-the-vault: "&cYou do not have permission for this vault!"
+  player-not-own-vault: "&cError: <player> does not own vault #<number>!"
+  no-permission: "&cYou do not have permission!"
+
+settings:
+  vault-size: 27 # Must be dividable by 9! For Example: 18, 36, 45, etc...

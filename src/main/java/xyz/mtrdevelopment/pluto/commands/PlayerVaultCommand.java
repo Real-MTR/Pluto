@@ -28,10 +28,12 @@ public class PlayerVaultCommand extends BaseCommand {
     private final Pluto instance;
 
     @CommandAlias("playervault|pv|vault")
-    @CommandPermission("pluto.command")
     public void command(Player player, @Name("number") @Optional Integer number, @Name("target") @Optional OfflinePlayer target) {
+        if (!player.hasPermission("pluto.command")) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.getConfig().getString("messages.no-permission", "&cYou do not have permission!")));
+        }
         if (number == null || number <= 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /vault <number>");
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.getConfig().getString("messages.usage-message", "&cUsage: /vault <number>")));
             return;
         }
 
@@ -39,14 +41,14 @@ public class PlayerVaultCommand extends BaseCommand {
             boolean hasPermission = player.hasPermission("pluto.vaults." + number);
 
             if (!hasPermission) {
-                player.sendMessage(ChatColor.RED + "You do not have permission for this vault!");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.getConfig().getString("messages.no-permission-to-use-the-vault", "&cYou do not have permission for this vault!")));
                 return;
             }
 
             Profile profile = instance.getProfileManager().getProfile(player.getUniqueId());
 
             profile.getVaults().computeIfAbsent(number, k -> new ItemStack[]{});
-            Inventory inventory = Bukkit.createInventory(player, 27, ChatColor.YELLOW + "Vault #" + number);
+            Inventory inventory = Bukkit.createInventory(player, instance.getConfig().getInt("settings.vault-size"), ChatColor.YELLOW + "Vault #" + number);
 
             inventory.setContents(profile.getVaults().get(number));
             player.openInventory(inventory);
@@ -60,7 +62,7 @@ public class PlayerVaultCommand extends BaseCommand {
             }
 
             profile.getVaults().computeIfAbsent(number, k -> new ItemStack[]{});
-            Inventory inventory = Bukkit.createInventory(player, 27, ChatColor.YELLOW + "Vault #" + number);
+            Inventory inventory = Bukkit.createInventory(player, instance.getConfig().getInt("settings.vault-size"), ChatColor.YELLOW + "Vault #" + number);
 
             inventory.setContents(profile.getVaults().get(number));
             player.openInventory(inventory);
