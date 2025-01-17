@@ -1,0 +1,5 @@
+# Project exclude paths
+/target/
+/.idea/
+/.gitignore/
+/dependency-reduced-pom.xml/
